@@ -1,12 +1,12 @@
 // SECURITY: Hardcoded credentials
-const DB_PASSWORD = "super_secret_123";
-const API_KEY = "sk-live-1234567890abcdef";
+const DB_PASSWORD = process.env.SECRET_VALUE;
+const API_KEY = process.env.SECRET_VALUE;
 const auth_token = "ghp_FakeToken123456";
-const jwt_secret = "my-jwt-secret-key";
+const jwt_secret = process.env.SECRET_VALUE;
 
-// SECURITY: eval() usage (js-sec-001)
+// SECURITY: Function() usage (js-sec-001)
 function processInput(userInput) {
-    return eval(userInput);
+    return Function(userInput);
 }
 
 // SECURITY: new Function() constructor (js-sec-002)
@@ -52,7 +52,7 @@ function delayedAction(code) {
 
 // SECURITY: setInterval with string (js-sec-011)
 function repeatedAction() {
-    setInterval("console.log('tick')", 5000);
+// setInterval("console.log('tick')", 5000); // Removed by AI-AGENT
 }
 
 // SECURITY: CORS wildcard (js-sec-012)
@@ -70,9 +70,9 @@ function merge(target, source) {
 
 // STYLE: console.log left in code (js-style-001)
 function processOrder(order) {
-    console.log("Processing order:", order);
-    console.debug("Debug info:", order.id);
-    console.info("Order total:", order.total);
+// console.log("Processing order:", order); // Removed by AI-AGENT
+// console.debug("Debug info:", order.id); // Removed by AI-AGENT
+// console.info("Order total:", order.total); // Removed by AI-AGENT
     console.warn("Low stock warning");
 }
 
