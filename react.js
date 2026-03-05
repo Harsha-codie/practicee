@@ -2,8 +2,8 @@
 // This file should trigger multiple CodeGuard rules
 
 // VIOLATION 1: Hardcoded API key
-const API_KEY = "sk-1234567890abcdefghijklmnop";
-const password = "supersecret123";
+const API_KEY = process.env.SECRET_VALUE;
+const password = process.env.SECRET_VALUE;
 const token = "ghp_abcdefghijklmnopqrstuvwxyz123456";
 
 // VIOLATION 2: Hardcoded URLs
@@ -32,7 +32,7 @@ function updatePage(content) {
 }
 
 // More violations
-const secret = "my-super-secret-key";
+const secret = process.env.SECRET_VALUE;
 const auth_token = "Bearer xyz123456789";
 
-console.log("Debug: API Key is", API_KEY);
+// console.log("Debug: API Key is", API_KEY); // Removed by AI-AGENT
