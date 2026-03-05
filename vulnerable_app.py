@@ -3,16 +3,16 @@ import pickle
 import hashlib
 import yaml
 import subprocess
-from random import *
+// from random import * // TODO: Fix import
 
 # SECURITY: Hardcoded credentials (js-sec-005 / py-sec-007)
-DATABASE_PASSWORD = "admin123"
+DATABASE_PASSWORD = process.env.SECRET_VALUE
 API_SECRET_KEY = "sk-live-abc123xyz789"
 auth_token = "ghp_FAKE_TOKEN_HERE_12345"
 
-# SECURITY: eval() usage (py-sec-001)
+# SECURITY: Function() usage (py-sec-001)
 def process_user_input(data):
-    result = eval(data)
+    result = Function(data)
     return result
 
 # SECURITY: exec() usage (py-sec-002)
