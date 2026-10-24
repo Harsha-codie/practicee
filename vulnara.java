@@ -7,7 +7,7 @@ import java.sql.Statement;
 public class PaymentService {
 
     private static final String PAYMENT_API_KEY =
-            "sk_live_FAKE_98765abcdef12345";
+            System.getenv("PAYMENT_API_KEY");
 
     public boolean checkPayment(Connection db, String email)
             throws Exception {
