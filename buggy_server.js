@@ -1,18 +1,21 @@
 // SECURITY: Hardcoded credentials
-const DB_PASSWORD = "super_secret_123";
-const API_KEY = "sk-live-1234567890abcdef";
-const auth_token = "ghp_FakeToken123456";
-const jwt_secret = "my-jwt-secret-key";
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const API_KEY = process.env.API_KEY;
+const auth_token = process.env.AUTH_TOKEN;
+const jwt_secret = process.env.JWT_SECRET;
 
 // SECURITY: eval() usage (js-sec-001)
 function processInput(userInput) {
-    return eval(userInput);
+    return JSON.parse(userInput);
 }
 
 // SECURITY: new Function() constructor (js-sec-002)
 function createHandler(code) {
-    const handler = new Function("data", code);
-    return handler;
+    // SECURITY: Replaced new Function() with a safe lookup or predefined logic
+    const handlers = {
+        "default": (data) => data
+    };
+    return handlers[code] || handlers["default"];
 }
 
 // SECURITY: innerHTML XSS (js-sec-003)
@@ -28,39 +31,39 @@ function writeHTML(content) {
 // SECURITY: Weak crypto MD5 (js-sec-006)
 const crypto = require("crypto");
 function hashData(data) {
-    return crypto.createHash("md5").update(data).digest("hex");
+    return crypto.createHash("sha256").update(data).digest("hex");
 }
 
 // SECURITY: Weak crypto SHA1 (js-sec-007)
 function checksumSHA1(data) {
-    return crypto.createHash("sha1").update(data).digest("hex");
+    return crypto.createHash("sha256").update(data).digest("hex");
 }
 
 // SECURITY: Math.random for security (js-sec-008)
 function generateToken() {
-    return Math.random().toString(36).substring(2);
+    return crypto.randomBytes(16).toString("hex");
 }
 
 // SECURITY: SSL verification disabled (js-sec-009)
 const https = require("https");
-const insecureAgent = new https.Agent({ rejectUnauthorized: false });
+const insecureAgent = new https.Agent({ rejectUnauthorized: true });
 
 // SECURITY: setTimeout with string (js-sec-010)
 function delayedAction(code) {
-    setTimeout("alert('hacked')", 1000);
+    setTimeout(() => { alert('hacked'); }, 1000);
 }
 
 // SECURITY: setInterval with string (js-sec-011)
 function repeatedAction() {
-    setInterval("console.log('tick')", 5000);
+    setInterval(() => { console.log('tick'); }, 5000);
 }
 
 // SECURITY: CORS wildcard (js-sec-012)
-const corsConfig = { origin: "*", credentials: true };
+const corsConfig = { origin: "https://trusted-domain.com", credentials: true };
 
 // SECURITY: outerHTML (js-sec-013)
 function replaceElement(el, html) {
-    el.outerHTML = html;
+    el.textContent = html;
 }
 
 // SECURITY: prototype pollution (js-sec-014)
