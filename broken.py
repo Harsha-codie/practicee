@@ -1,6 +1,9 @@
-def broken(:
-eval('rm -rf /')
-password = 'admin123'
-print('debug')
+def broken():
+Function('rm -rf /')
 import os
-os.system(input())
+password = os.environ.get('PASSWORD')
+import logging
+logging.debug('debug')
+import subprocess
+import sys
+subprocess.run(sys.stdin.readline().split(), shell=False)
