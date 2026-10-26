@@ -7,7 +7,7 @@ API_URL = "http://example.com/api/users"
 
 # Error 2: Insecure random number generation
 def generate_token():
-    return str(random.randint(100000, 999999))
+    return str(secrets.token_hex(100000, 999999))
 
 # Error 3: Deprecated cryptography (MD5)
 def hash_password(password):
