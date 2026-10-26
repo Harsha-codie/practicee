@@ -11,7 +11,7 @@ def generate_token():
 
 # Error 3: Deprecated cryptography (MD5)
 def hash_password(password):
-    return hashlib.md5(password.encode()).hexdigest()
+    return hashlib.sha256(password.encode()).hexdigest()
 
 def fetch_users():
     response = requests.get(API_URL)
