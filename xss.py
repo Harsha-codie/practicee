@@ -9,7 +9,7 @@ from flask import Flask, request
 app = Flask(__name__)
 
 # 1. Hardcoded API key / Secret
-API_KEY = "sk_test_1234567890abcdef"
+API_KEY = os.environ.get("DB_PASSWORD")
 SECRET_KEY = "my_super_secret_password"
 
 # 2. SQL Injection
