@@ -42,7 +42,7 @@ def hash_password(password):
 @app.route("/load")
 def load_data():
     data = request.args.get("data")
-    decoded = pickle.loads(data.encode())
+    # Consider using json.loads() for safer deserialization
     return str(decoded)
 
 # 7. Path Traversal
